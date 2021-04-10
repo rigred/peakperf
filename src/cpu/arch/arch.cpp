@@ -16,6 +16,7 @@
 #include "cannon_lake_512.hpp"
 #include "ice_lake.hpp"
 #include "knl.hpp"
+#include "k10.hpp"
 #include "zen.hpp"
 #include "zen2.hpp"
 
@@ -24,11 +25,14 @@ struct benchmark_cpu {
   double gflops;
   const char* name;
   bench_type benchmark_type;
+  void (*compute_function_128)(__m128 *farr_ptr, __m128, int);
   void (*compute_function_256)(__m256 *farr_ptr, __m256, int);
   void (*compute_function_512)(__m512 *farr_ptr, __m512, int);
 };
 
 enum {
+  BENCH_128_4_NOFMA,
+  BENCH_128_8_NOFMA,
   BENCH_256_6_NOFMA,
   BENCH_256_5,
   BENCH_256_8,
@@ -49,6 +53,7 @@ static const char *bench_name[] = {
   /*[BENCH_TYPE_COMET_LAKE]      = */ "Comet Lake (AVX2)",
   /*[BENCH_TYPE_ICE_LAKE]        = */ "Ice Lake (AVX2)",
   /*[BENCH_TYPE_KNIGHTS_LANDING] = */ "Knights Landing (AVX512)",
+  /*[BENCH_TYPE_K10]             = */ "K10 (SSE4A)",
   /*[BENCH_TYPE_ZEN]             = */ "Zen (AVX2)",
   /*[BENCH_TYPE_ZEN_PLUS]        = */ "Zen+ (AVX2)",
   /*[BENCH_TYPE_ZEN2]            = */ "Zen 2 (AVX2)",
@@ -66,6 +71,7 @@ static const char *bench_types_str[] = {
   /*[BENCH_TYPE_COMET_LAKE]      = */ "comet_lake",
   /*[BENCH_TYPE_ICE_LAKE]        = */ "ice_lake",
   /*[BENCH_TYPE_KNIGHTS_LANDING] = */ "knights_landing",
+  /*[BENCH_TYPE_K10]             = */ "k10",
   /*[BENCH_TYPE_ZEN]             = */ "zen",
   /*[BENCH_TYPE_ZEN_PLUS]        = */ "zen_plus",
   /*[BENCH_TYPE_ZEN2]            = */ "zen2",
@@ -106,6 +112,16 @@ double compute_gflops(int n_threads, char bench) {
   int bytes_in_vect;
 
   switch(bench) {
+    case BENCH_128_4_NOFMA:
+      fma_available = B_128_4_NOFMA_FMA_AV;
+      op_per_it = B_128_4_NOFMA_OP_IT;
+      bytes_in_vect = B_128_4_NOFMA_BYTES;
+      break;
+    case BENCH_128_8_NOFMA:
+      fma_available = B_128_8_NOFMA_FMA_AV;
+      op_per_it = B_128_8_NOFMA_OP_IT;
+      bytes_in_vect = B_128_8_NOFMA_BYTES;
+      break;
     case BENCH_256_6_NOFMA:
       fma_available = B_256_6_NOFMA_FMA_AV;
       op_per_it = B_256_6_NOFMA_OP_IT;
@@ -158,15 +174,22 @@ double compute_gflops(int n_threads, char bench) {
  * - Comet Lake      -> skylake_256
  * - Ice Lake        -> ice_lake
  * - Knights Landing -> knl
+ * - K10             -> k10
  * - Zen             -> zen
  * - Zen+            -> zen
  * - Zen 2           -> zen2
+ *
  */
 bool select_benchmark(struct benchmark_cpu* bench) {
+  bench->compute_function_128 = NULL;
   bench->compute_function_256 = NULL;
   bench->compute_function_512 = NULL;
 
   switch(bench->benchmark_type) {
+    case BENCH_TYPE_K10:
+      bench->compute_function_128 = compute_k10;
+      bench->gflops = compute_gflops(bench->n_threads, BENCH_128_8_NOFMA);
+      break;
     case BENCH_TYPE_SANDY_BRIDGE:
       bench->compute_function_256 = compute_sandy_bridge;
       bench->gflops = compute_gflops(bench->n_threads, BENCH_256_6_NOFMA);
@@ -268,6 +291,9 @@ struct benchmark_cpu* init_benchmark_cpu(struct cpu* cpu, int n_threads, char *b
     bool avx512 = cpu_has_avx512(cpu);
     
     switch(u) {
+      case UARCH_K10:
+        bench->benchmark_type = BENCH_TYPE_K10;
+		break;
       case UARCH_SANDY_BRIDGE:
         bench->benchmark_type = BENCH_TYPE_SANDY_BRIDGE;
         break;  
@@ -335,6 +361,14 @@ bool compute_cpu (struct benchmark_cpu* bench, double* e_time) {
     #pragma omp parallel for
     for(int t=0; t < bench->n_threads; t++)
       bench->compute_function_512(farr_ptr, mult, t);
+  }
+  if (bench->benchmark_type == BENCH_TYPE_K10) {
+     __m128 mult = {0};
+     __m128 *farr_ptr = NULL;
+
+     #pragma omp parallel for
+     for(int t=0; t < bench->n_threads; t++)
+       bench->compute_function_128(farr_ptr, mult, t);
   }
   else {
     __m256 mult = {0};

@@ -296,6 +296,7 @@ The following tables act as a summary of all supported microarchitectures with t
 | Ryzen ZEN+      |:heavy_check_mark:| :x:                |     5 | 1 (FMA AVX2)    | 5 (FMA)         |:heavy_check_mark:|  [8] |
 | Ryzen ZEN 2     |:heavy_check_mark:| :x:                |    10 | 2 (FMA AVX2)    | 5 (FMA)         |:x:               |  [9] |
 | Ryzen ZEN 3     |:heavy_check_mark:| :x:                |     8 | 2 (FMA AVX2)    | 4 (FMA)         |:x:               | [11] |
+| K10 Barcelona   |:heavy_check_mark:| :x:                |     4 | 2 (ADD+MUL)     | 4 (ADD) 4 (MUL) |:x:               | [12] |
 
 References:
 - [1]  [Agner Fog Instruction Tables (Page 199, VADDPS)](https://www.agner.org/optimize/instruction_tables.pdf)
@@ -309,6 +310,7 @@ References:
 - [9]  [Agner Fog Instruction Tables (Page 111, VFMADD132PS)](https://www.agner.org/optimize/instruction_tables.pdf)
 - [10] [Wikichip](https://en.wikichip.org/wiki/intel/microarchitectures/comet_lake)
 - [11]  [Agner Fog Instruction Tables (Page 124, VFMADD132PS)](https://www.agner.org/optimize/instruction_tables.pdf)
+- [12] [Agner Fog Instruction Tables (Page 34, MULPS)](https://www.agner.org/optimize/instruction_tables.pdf)
 
 ## 6.2 GPU
 | uarch   | Latency  | Tested           | Refs |
