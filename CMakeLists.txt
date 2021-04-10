@@ -32,7 +32,7 @@ set(CMAKE_CXX_FLAGS_DEBUG "-g -Wall -Wextra -O0")
 if(ENABLE_CPU_DEVICE)
     target_compile_definitions(peakperf PUBLIC DEVICE_CPU_ENABLED)
 
-    set_source_files_properties(${ARCH_CPU_DIR}/arch.cpp       PROPERTIES COMPILE_FLAGS "-msse3 -msse4a -mavx -mavx2 -mavx512f -march=native -mtune=native -mno-vzeroupper -fopenmp")
+    set_source_files_properties(${ARCH_CPU_DIR}/arch.cpp       PROPERTIES COMPILE_FLAGS "-msse3 -msse4a -mavx -mavx2 -mavx512f -fopenmp")
     add_library(cpu_device STATIC ${CPUFETCH_DIR}/cpufetch.cpp ${CPUFETCH_DIR}/cpuid.cpp ${CPUFETCH_DIR}/uarch.cpp ${ARCH_CPU_DIR}/arch.cpp)
     target_link_libraries(peakperf -lm -fopenmp cpu_device sandy_bridge ivy_bridge haswell skylake_256 skylake_512 broadwell ice_lake knl k10 zen zen2)
 
