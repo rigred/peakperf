@@ -7,7 +7,7 @@
 #include "arch.hpp"
 #include "../../global.hpp"
 
-#include "256_2_nofma.hpp"
+#include "256_3_nofma.hpp"
 #include "256_6_nofma.hpp"
 #include "256_6.hpp"
 #include "256_5.hpp"
@@ -55,7 +55,7 @@ bool select_benchmark_avx(struct benchmark_cpu* bench) {
       bench->gflops = compute_gflops(bench->n_threads, BENCH_256_5);
       break;
     case BENCH_TYPE_PUMA:
-      bench->bench_avx->compute_function_256 = compute_256_2_nofma;
+      bench->bench_avx->compute_function_256 = compute_256_3_nofma;
       bench->gflops = compute_gflops(bench->n_threads, BENCH_256_6_NOFMA);
       break;
     case BENCH_TYPE_ALDER_LAKE: // Might be an hybrid architecture

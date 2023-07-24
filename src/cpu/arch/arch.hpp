@@ -27,7 +27,7 @@ enum {
   BENCH_128_6,
   BENCH_128_8,
   BENCH_256_6_NOFMA,
-  BENCH_256_2_NOFMA,
+  BENCH_256_3_NOFMA,
   BENCH_256_5,
   BENCH_256_6,
   BENCH_256_8,
@@ -153,10 +153,10 @@ static const char *bench_types_str[] = {
 #define B_256_6_NOFMA_FMA_AV 1
 #define B_256_6_NOFMA_OP_IT  6
 #define B_256_6_NOFMA_BYTES  32
-//      AVX_256_2_NOFMA      //
-#define B_256_2_NOFMA_FMA_AV 1
-#define B_256_2_NOFMA_OP_IT  2
-#define B_256_2_NOFMA_BYTES  32
+//      AVX_256_3_NOFMA      //
+#define B_256_3_NOFMA_FMA_AV 1
+#define B_256_3_NOFMA_OP_IT  3
+#define B_256_3_NOFMA_BYTES  32
 //      AVX_256_5            //
 #define B_256_5_FMA_AV       2
 #define B_256_5_OP_IT        5
@@ -186,7 +186,7 @@ static const char *bench_types_str[] = {
   #define BYTES_IN_VECT 64
   #define TYPE __m512
   #define SIZE OP_PER_IT*2
-#elif defined(AVX_256_10) || defined(AVX_256_8) || defined(AVX_256_5) || defined(AVX_256_6) || defined(AVX_256_6_NOFMA)  || defined(AVX_256_2_NOFMA)
+#elif defined(AVX_256_10) || defined(AVX_256_8) || defined(AVX_256_5) || defined(AVX_256_6) || defined(AVX_256_6_NOFMA)  || defined(AVX_256_3_NOFMA)
   #define BYTES_IN_VECT 32
   #define TYPE __m256
   #define SIZE OP_PER_IT*2
