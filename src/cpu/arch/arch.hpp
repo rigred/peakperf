@@ -186,7 +186,7 @@ static const char *bench_types_str[] = {
   #define BYTES_IN_VECT 64
   #define TYPE __m512
   #define SIZE OP_PER_IT*2
-#elif defined(AVX_256_10) || defined(AVX_256_8) || defined(AVX_256_5) || defined(AVX_256_6) || defined(AVX_256_6_NOFMA)
+#elif defined(AVX_256_10) || defined(AVX_256_8) || defined(AVX_256_5) || defined(AVX_256_6) || defined(AVX_256_6_NOFMA)  || defined(AVX_256_2_NOFMA)
   #define BYTES_IN_VECT 32
   #define TYPE __m256
   #define SIZE OP_PER_IT*2
