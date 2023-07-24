@@ -54,7 +54,7 @@ bool select_benchmark_avx(struct benchmark_cpu* bench) {
       bench->gflops = compute_gflops(bench->n_threads, BENCH_256_5);
       break;
     case BENCH_TYPE_PUMA:
-      bench->bench_avx->compute_function_256 = BENCH_256_6_NOFMA;
+      bench->bench_avx->compute_function_256 = compute_256_6_nofma;
       bench->gflops = compute_gflops(bench->n_threads, BENCH_256_6_NOFMA);
       break;
     case BENCH_TYPE_ALDER_LAKE: // Might be an hybrid architecture
