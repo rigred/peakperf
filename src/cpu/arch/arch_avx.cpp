@@ -47,6 +47,7 @@ bool select_benchmark_avx(struct benchmark_cpu* bench) {
       bench->bench_avx->compute_function_256 = compute_256_8;
       bench->gflops = compute_gflops(bench->n_threads, BENCH_256_8);
       break;
+    case BENCH_TYPE_PUMA:
     case BENCH_TYPE_PILEDRIVER: // Piledriver should not use Zen file since it is compiled with AVX2 (piledriver is AVX only)
     case BENCH_TYPE_ZEN:
     case BENCH_TYPE_ZEN_PLUS:

@@ -232,6 +232,9 @@ struct benchmark_cpu* init_benchmark_cpu(struct cpu* cpu, int n_threads, char *b
       case UARCH_KNIGHTS_LANDING:
         bench->benchmark_type = BENCH_TYPE_KNIGHTS_LANDING;
         break;
+      case UARCH_PUMA_2014:
+        bench->benchmark_type = BENCH_TYPE_PUMA;
+        break;
       case UARCH_PILEDRIVER:
         bench->benchmark_type = BENCH_TYPE_PILEDRIVER;
         break;
