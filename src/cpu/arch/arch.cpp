@@ -51,6 +51,11 @@ double compute_gflops(int n_threads, char bench) {
       op_per_it = B_128_8_OP_IT;
       bytes_in_vect = B_128_8_BYTES;
       break;
+    case BENCH_256_2_NOFMA:
+      fma_available = B_256_2_NOFMA_FMA_AV;
+      op_per_it = B_256_2_NOFMA_OP_IT;
+      bytes_in_vect = B_256_2_NOFMA_BYTES;
+      break;
     case BENCH_256_6_NOFMA:
       fma_available = B_256_6_NOFMA_FMA_AV;
       op_per_it = B_256_6_NOFMA_OP_IT;

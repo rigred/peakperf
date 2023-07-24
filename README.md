@@ -298,7 +298,7 @@ The following tables act as a summary of all supported microarchitectures with t
 | Alder Lake      |:heavy_check_mark:| :heavy_check_mark: |     8 | 2 (FMA AVX2)    | 4 (FMA)         |:heavy_check_mark:|  [?] |
 | Knights Landing |:heavy_check_mark:| :heavy_check_mark: |    12 | 2 (FMA AVX512)  | 6 (FMA)         |:heavy_check_mark:|  [6] |
 | Piledriver      |:heavy_check_mark:| :x:                |     5 | 1 (FMA AVX)     | 5 (FMA)         |:x:               |  [?] |
-| Puma (2014)     | :x:              | :x:                |     6 | 1 (ADD+MUL AVX) | 1 (ADD) 6 (MUL) |:x:               |  [13]  |
+| Puma (2014)     | :x:              | :x:                |     2 | 1 (AVX 2x128)   | 3 (ADD) 4 (MUL) |:x:               | [13] |
 | Zen             |:heavy_check_mark:| :x:                |     5 | 1 (FMA AVX2)    | 5 (FMA)         |:x:               |  [7] |
 | Zen+            |:heavy_check_mark:| :x:                |     5 | 1 (FMA AVX2)    | 5 (FMA)         |:heavy_check_mark:|  [8] |
 | Zen 2           |:heavy_check_mark:| :x:                |    10 | 2 (FMA AVX2)    | 5 (FMA)         |:x:               |  [9] |

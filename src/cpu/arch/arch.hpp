@@ -27,6 +27,7 @@ enum {
   BENCH_128_6,
   BENCH_128_8,
   BENCH_256_6_NOFMA,
+  BENCH_256_2_NOFMA,
   BENCH_256_5,
   BENCH_256_6,
   BENCH_256_8,
@@ -152,6 +153,10 @@ static const char *bench_types_str[] = {
 #define B_256_6_NOFMA_FMA_AV 1
 #define B_256_6_NOFMA_OP_IT  6
 #define B_256_6_NOFMA_BYTES  32
+//      AVX_256_2_NOFMA      //
+#define B_256_2_NOFMA_FMA_AV 1
+#define B_256_2_NOFMA_OP_IT  2
+#define B_256_2_NOFMA_BYTES  32
 //      AVX_256_5            //
 #define B_256_5_FMA_AV       2
 #define B_256_5_OP_IT        5
