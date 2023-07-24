@@ -298,6 +298,7 @@ The following tables act as a summary of all supported microarchitectures with t
 | Alder Lake      |:heavy_check_mark:| :heavy_check_mark: |     8 | 2 (FMA AVX2)    | 4 (FMA)         |:heavy_check_mark:|  [?] |
 | Knights Landing |:heavy_check_mark:| :heavy_check_mark: |    12 | 2 (FMA AVX512)  | 6 (FMA)         |:heavy_check_mark:|  [6] |
 | Piledriver      |:heavy_check_mark:| :x:                |     5 | 1 (FMA AVX)     | 5 (FMA)         |:x:               |  [?] |
+| Puma (2014)     | :x:              | :x:                |     6 | 1 (ADD+MUL AVX) | 1 (ADD) 6 (MUL) |:x:               |  [13]  |
 | Zen             |:heavy_check_mark:| :x:                |     5 | 1 (FMA AVX2)    | 5 (FMA)         |:x:               |  [7] |
 | Zen+            |:heavy_check_mark:| :x:                |     5 | 1 (FMA AVX2)    | 5 (FMA)         |:heavy_check_mark:|  [8] |
 | Zen 2           |:heavy_check_mark:| :x:                |    10 | 2 (FMA AVX2)    | 5 (FMA)         |:x:               |  [9] |
@@ -316,6 +317,7 @@ References:
 - [10] [Wikichip](https://en.wikichip.org/wiki/intel/microarchitectures/comet_lake)
 - [11]  [Agner Fog Instruction Tables (Page 124, VFMADD132PS)](https://www.agner.org/optimize/instruction_tables.pdf)
 - [12]  [Agner Fog Instruction Tables (Page 347, VADDPS)](https://www.agner.org/optimize/instruction_tables.pdf)
+- [13] [AMD 52128 16h Software optimization Guide](https://www.amd.com/system/files/TechDocs/52128_16h_Software_Opt_Guide.zip)
 
 ## 6.2 GPU
 | uarch   | Latency  | Tested           | Refs |
